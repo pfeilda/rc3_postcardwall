@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/base.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">
+
+
+    <script src="{{ url_for('static',filename='js/jquery-1.10.2.min.js') }}" defer></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}" defer></script>
+    <script>
+$(document).ready(function() {
+    $('img').unveil(1000);
+});
+
+
+
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+
+        {% for image in images %}
+        <div class="col-md-6">
+
+            <div class="card card-flip h-100" >
+                <div class="card-front">
+                    <img src="{{ image.src }}-upper.png?w={{ image.width }}&amp;h={{ image.height }}"/>
+                </div>
+                <div class="card-back">
+                    <img src="{{ image.src }}-lower.png?w={{ image.width }}&amp;h={{ image.height }}"/>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<footer class="col-md-12">
+    <p><a href="https://cert.ccc.de/wiki/index.php?title=Kontakt">Impressum</a></p>
+</footer>
+
+</body>
+</html>
