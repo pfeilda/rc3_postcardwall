@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
 
 ssl_context = ssl.create_default_context()
 
