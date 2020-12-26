@@ -4,10 +4,13 @@ import configparser
 import ssl
 from imapclient import IMAPClient
 import email
+from email.utils import parsedate_to_datetime, parsedate_tz, mktime_tz
 from PIL import Image
 import os
 import io
 import logging
+from datetime import datetime
+import time
 
 logging.basicConfig(
     format='%(asctime)s - %(levelname)s: %(message)s',
@@ -36,11 +39,12 @@ with IMAPClient(config['imap']['host'], ssl_context=ssl_context) as server:
     messages = server.search('UNSEEN')
     for uid, message_data in server.fetch(messages, 'RFC822').items():
         email_message = email.message_from_bytes(message_data[b'RFC822'])
-        print(uid, email_message.get('From'), email_message.get('Subject'))
+        print(mktime_tz(parsedate_tz(email_message.get('Date'))))
+        print(email_message.get('Message-ID')[1:][:-1].split("@")[0])
         for part in email_message.walk():
             print(part.get_content_type())
             if part.get_content_type() == 'image/jpeg':
-                fileName = part.get_filename()
+                fileName = str(mktime_tz(parsedate_tz(email_message.get('Date'))))+'_'+email_message.get('Message-ID')[1:][:-1].split("@")[0]+'.jpg'
                 if bool(fileName):
                     filePath = os.path.join('./cards/', fileName)
                     if not os.path.isfile(filePath):

@@ -38,6 +38,7 @@ def image(filename):
 def index():
     images = []
     for root, dirs, files in os.walk('./cards/'):
+        files.sort(reverse=True)
         for filename in [os.path.join(root, name) for name in files]:
             if not filename.endswith('.jpg'):
                 continue
