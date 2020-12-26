@@ -9,6 +9,7 @@ WIDTH = 700
 HEIGHT = 600
 
 
+
 @app.route('/cards/<path:filename>')
 def image(filename):
     try:
@@ -37,12 +38,13 @@ def image(filename):
 @app.route('/')
 def index():
     images = []
-    for root, dirs, files in os.walk('./cards/'):
+    for root, dirs, files in os.walk(os.path.dirname(__file__) + '/cards/'):
         files.sort(reverse=True)
         for filename in [os.path.join(root, name) for name in files]:
             if not filename.endswith('.jpg'):
                 continue
             im = Image.open(filename+"-upper.png")
+            name = filename.split("/")
             w, h = im.size
             aspect = 1.0*w/h
             if aspect > 1.0*WIDTH/HEIGHT:
@@ -54,7 +56,7 @@ def index():
             images.append({
                 'width': int(width),
                 'height': int(height),
-                'src': filename
+                'src': '/cards/'+str(name[-1])
             })
 
     return render_template('main.html', **{
