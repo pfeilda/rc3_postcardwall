@@ -43,9 +43,9 @@ with IMAPClient(config['imap']['host'], ssl_context=ssl_context) as server:
                 fileName = str(mktime_tz(parsedate_tz(email_message.get('Date')))) + '_' \
                            + email_message.get('Message-ID').strip()[1:][:-1].split("@")[0] + '.jpg'
                 if bool(fileName):
-                    filePath = os.path.join('./cards/', fileName)
+                    filePath = os.path.join(os.path.dirname(__file__) + '/cards/', fileName)
                     if not os.path.isfile(filePath):
                         fp = open(filePath, 'wb')
                         fp.write(part.get_payload(decode=True))
                         fp.close()
-                crop('./cards/' + fileName, part.get_payload(decode=True))
+                crop(os.path.dirname(__file__) + '/cards/' + fileName, part.get_payload(decode=True))
