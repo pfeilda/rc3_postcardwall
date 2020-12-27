@@ -18,13 +18,22 @@
 $(document).ready(function() {
     $('img').unveil(1000);
 });
-
-
-
     </script>
 </head>
 
 <body>
+<header class="rc3-header container mb-3 mt-6 no-min-height">
+    <div class="row">
+        <div class="col-md-3">
+            <img height="170rem" src="{{ url_for('static',filename='img/rc3_logo_pink.svg') }}" alt="Remote Chaos Experience logo" title="Remote Chaos Experience logo">
+        </div>
+        <div class="col-md-9 centered-column">
+            <h1>Postcard Board</h1>
+            <h2>Send us postcards via c3post.de</h2>
+        </div>
+    </div>
+</header>
+
 <div class="container">
     <div class="row">
 
@@ -33,10 +42,10 @@ $(document).ready(function() {
 
             <div class="card card-flip h-100" >
                 <div class="card-front">
-                    <img src="{{ image.src }}-upper.png?w={{ image.width }}&amp;h={{ image.height }}"/>
+                    <img class="width-100-percentage" src="{{ image.src }}-upper.png?w={{ image.width }}&amp;h={{ image.height }}"/>
                 </div>
                 <div class="card-back">
-                    <img src="{{ image.src }}-lower.png?w={{ image.width }}&amp;h={{ image.height }}"/>
+                    <img class="width-100-percentage" src="{{ image.src }}-lower.png?w={{ image.width }}&amp;h={{ image.height }}"/>
                 </div>
             </div>
         </div>
@@ -45,8 +54,14 @@ $(document).ready(function() {
     </div>
 </div>
 
-<footer class="col-md-12">
-    <p><a href="https://cert.ccc.de/wiki/index.php?title=Kontakt">Impressum</a></p>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><a href="https://cert.ccc.de/wiki/index.php?title=Kontakt">Impressum</a></p>
+            </div>
+        </div>
+    </div>
 </footer>
 
 </body>
