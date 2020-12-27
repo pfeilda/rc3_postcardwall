@@ -56,7 +56,7 @@ def index():
             images.append({
                 'width': int(width),
                 'height': int(height),
-                'src': '/cards/'+str(name[-1])
+                'src': './cards/'+str(name[-1])
             })
 
     return render_template('main.html', **{
